@@ -1,0 +1,19 @@
+# dos-scenario.yaml
+type: leaky
+name: crowdsecurity/dos-attack
+description: "Détecte les attaques par déni de service"
+filter: "evt.Parsed.program == 'kernel' && evt.Parsed.message contains 'Shorewall:net-fw:DROP:'"
+groupby: evt.Unmarshaled.iptables_data.SRC
+distinct: evt.Unmarshaled.iptables_data.SPT
+capacity: 15
+leakspeed: 5s
+blackhole: 5m
+labels:
+  remediation: true
+  classification:
+    - attack.T1498
+    - attack.T1499
+  behavior: "tcp:dos"
+  label: "DoS Attack"
+  spoofable: 3
+  confidence: 8
