@@ -2,7 +2,7 @@
 type: leaky
 name: crowdsecurity/dos-attack
 description: "Détecte les attaques par déni de service"
-filter: "evt.Parsed.program == 'kernel' && evt.Parsed.message contains 'Shorewall:net-fw:DROP:'"
+filter: "evt.Parsed.program == 'kernel' && evt.Parsed.message contains 'IPTABLES DROP:'"
 groupby: evt.Unmarshaled.iptables_data.SRC
 distinct: evt.Unmarshaled.iptables_data.SPT
 capacity: 15
