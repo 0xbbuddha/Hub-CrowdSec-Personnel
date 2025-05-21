@@ -3,8 +3,8 @@ type: leaky
 name: crowdsecurity/dos-attack
 description: "Détecte les attaques par déni de service"
 filter: "evt.Parsed.program == 'kernel' && evt.Parsed.message contains 'IPTABLES DROP:'"
-groupby: evt.Unmarshaled.iptables_data.SRC
-distinct: evt.Unmarshaled.iptables_data.SPT
+groupby: evt.Unmarshaled.iptables.SRC
+distinct: evt.Unmarshaled.iptables.SPT
 capacity: 15
 leakspeed: 5s
 blackhole: 5m
