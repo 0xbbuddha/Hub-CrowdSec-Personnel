@@ -1,6 +1,6 @@
 # dos-scenario.yaml
 type: leaky
-name: crowdsecurity/dos-on-single-port
+name: crowdsecurity/dos-scenario
 description: "Détecte les attaques DoS ciblées sur un seul port"
 filter: "evt.Parsed.program == 'kernel' && evt.Parsed.message contains 'IN=' && evt.Unmarshaled.iptables.DPT != ''"
 groupby: "evt.Unmarshaled.iptables.SRC + ':' + evt.Unmarshaled.iptables.DPT"
