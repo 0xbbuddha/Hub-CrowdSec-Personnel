@@ -1,19 +1,18 @@
 # dos-scenario.yaml
 type: leaky
-name: crowdsecurity/dos-attack
-description: "Détecte les attaques par déni de service"
-filter: "evt.Parsed.program == 'kernel' && evt.Parsed.message contains 'IPTABLES DROP:'"
-groupby: evt.Unmarshaled.iptables.SRC
-distinct: evt.Unmarshaled.iptables.SPT
-capacity: 15
+name: crowdsecurity/dos-on-single-port
+description: "Détecte les attaques DoS ciblées sur un seul port"
+filter: "evt.Parsed.program == 'kernel' && evt.Parsed.message contains 'IN=' && evt.Unmarshaled.iptables.DPT != ''"
+groupby: "evt.Unmarshaled.iptables.SRC + ':' + evt.Unmarshaled.iptables.DPT"
+distinct: "evt.Unmarshaled.iptables.SPT"
+capacity: 20
 leakspeed: 5s
-blackhole: 5m
+blackhole: 10m
 labels:
   remediation: true
   classification:
-    - attack.T1498
     - attack.T1499
   behavior: "tcp:dos"
-  label: "DoS Attack"
-  spoofable: 3
-  confidence: 8
+  label: "DoS Targeted Port"
+  spoofable: 2
+  confidence: 9
