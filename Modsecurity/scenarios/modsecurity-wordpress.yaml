@@ -1,6 +1,6 @@
 type: trigger
 name: crowdsecurity/modsecurity-wordpress
-description: "Attaques WordPress détectées via ModSecurity (classification applicative)"
+description: "WordPress attacks detected via ModSecurity (application classification)"
 filter: |
   evt.Meta.log_type == "modsecurity"
   && (evt.Parsed.ruleseverity == "CRITICAL" || evt.Parsed.ruleseverity == "2")

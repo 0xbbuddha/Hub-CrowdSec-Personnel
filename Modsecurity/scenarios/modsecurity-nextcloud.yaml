@@ -1,6 +1,6 @@
 type: trigger
 name: crowdsecurity/modsecurity-nextcloud
-description: "Attaques Nextcloud détectées via ModSecurity (classification applicative)"
+description: "Nextcloud attacks detected via ModSecurity (application classification)"
 filter: |
   evt.Meta.log_type == "modsecurity"
   && (evt.Parsed.ruleseverity == "CRITICAL" || evt.Parsed.ruleseverity == "2")
