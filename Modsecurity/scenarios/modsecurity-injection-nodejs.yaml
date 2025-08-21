@@ -5,7 +5,7 @@ filter: |
   evt.Meta.log_type == "modsecurity"
   && (evt.Parsed.ruleseverity == "CRITICAL" || evt.Parsed.ruleseverity == "2")
   && evt.Parsed.ruleid matches "^934"
-  && (evt.Parsed.tags matches "attack-injection-nodejs" || evt.Parsed.tags matches "attack-rce")
+  && (evt.Parsed.tags matches "platform-nodejs" || evt.Parsed.tags matches "language-javascript" || evt.Parsed.tags matches "attack-injection-generic")
 groupby: evt.Meta.source_ip
 labels:
   remediation: true
