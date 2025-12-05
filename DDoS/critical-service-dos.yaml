@@ -1,0 +1,17 @@
+type: leaky
+name: crowdsecurity/critical-service-dos
+description: "DoS sur services critiques (SSH, HTTP, HTTPS, SMTP, DB)"
+filter: |
+  evt.Meta.log_type == 'iptables_drop' && 
+  evt.Parsed.proto == 'tcp' &&
+  evt.Parsed.dst_port in ['22', '80', '443', '25', '3306', '5432', '3389', '21']
+groupby: "evt.Meta.source_ip + ':' + evt.Parsed.dst_port"
+distinct: "evt.Parsed.src_port"
+capacity: 10
+leakspeed: 5s
+blackhole: 4h
+labels:
+  remediation: true
+  service: "critical"
+  type: "service_dos"
+  confidence: 9

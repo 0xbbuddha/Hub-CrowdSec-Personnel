@@ -1,0 +1,16 @@
+type: leaky
+name: crowdsecurity/tcp-syn-flood
+description: "SYN flood / DoS TCP sur un port spécifique"
+filter: |
+  evt.Meta.log_type == 'iptables_drop' && 
+  evt.Parsed.proto == 'tcp' &&
+  evt.Parsed.dst_port != ''
+groupby: "evt.Meta.source_ip + ':' + evt.Parsed.dst_port"
+capacity: 30
+leakspeed: 10s
+blackhole: 2h
+labels:
+  remediation: true
+  service: "tcp"
+  type: "syn_flood"
+  confidence: 8

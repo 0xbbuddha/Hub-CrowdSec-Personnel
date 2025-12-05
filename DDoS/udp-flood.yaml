@@ -1,0 +1,15 @@
+type: leaky
+name: crowdsecurity/udp-flood
+description: "UDP flood attack"
+filter: |
+  evt.Meta.log_type == 'iptables_drop' && 
+  evt.Parsed.proto == 'udp'
+groupby: evt.Meta.source_ip
+capacity: 100
+leakspeed: 10s
+blackhole: 1h
+labels:
+  remediation: true
+  service: "udp"
+  type: "udp_flood"
+  confidence: 7

@@ -1,0 +1,16 @@
+type: leaky
+name: crowdsecurity/tcp-flood-generic
+description: "TCP flood sans port de destination"
+filter: |
+  evt.Meta.log_type == 'iptables_drop' && 
+  evt.Parsed.proto == 'tcp' &&
+  evt.Parsed.dst_port == ''
+groupby: evt.Meta.source_ip
+capacity: 50
+leakspeed: 15s
+blackhole: 1h
+labels:
+  remediation: true
+  service: "tcp"
+  type: "tcp_flood"
+  confidence: 6
