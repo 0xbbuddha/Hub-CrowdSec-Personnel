@@ -1,4 +1,4 @@
 ```bash
-chmod +x setup-iptables.sh
+chmod +x setup_iptables.sh
 ./setup_iptables.sh
 ```
