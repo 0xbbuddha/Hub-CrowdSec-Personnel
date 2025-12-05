@@ -1,1 +1,4 @@
-iptables -A INPUT -j LOG --log-prefix "IPTABLES DROP:" --log-level 4
+```bash
+chmod +x setup-iptables.sh
+./setup.iptables.sh
+```
